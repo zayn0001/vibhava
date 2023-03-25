@@ -37,7 +37,7 @@ function Page() {
     const checkanswer = (e)=>{
         console.log("clicked")
         console.log(questionslist.find(x=>x.id===random).answer)
-        console.log(input)
+        console.log(input.toLowerCase())
         if (questionslist.find(x=>x.id===random).answer === input.toLowerCase()){
             console.log("correct")
             setRight(true)
