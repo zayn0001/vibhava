@@ -1,24 +1,27 @@
-import { Alert, Button, Card, CardActionArea, CardContent, createTheme, TextField, Typography, ThemeProvider } from '@mui/material'
-import { useEffect, useReducer, useRef, useState } from 'react'
+import { Alert, Button, Card, CardActionArea, CardContent,TextField, Typography} from '@mui/material'
+import { useEffect, useState } from 'react'
 import './App.css'
 import {data} from './data'
 import {app, auth} from './firebase';
 import { useCookies } from 'react-cookie';
 import { getDatabase, onValue, ref, set } from "firebase/database";
 import * as React from "react"
+import { useParams } from 'react-router-dom';
 
 
 function Page(props) {
     const [questionslist, setQuestionslist] = useState([])
+    const {questionbank} = useParams()
     const [cookies, setCookie] = useCookies(['user']);
     const [input, setInput] = useState("")
     const [question, setQuestion] = useState("")
     const questions = 10
     const [rightans, setRight] = useState()
-    const [done, setDone] = useState("")
+    //const [done, setDone] = useState("")
     const [alert, setAlert] = useState()
-    const [random, setRandom] = useState(0)
-    const text = useRef(null)
+    //const [random, setRandom] = useState(0)
+    const [mscore, setMscore] = useState(0)
+    //const text = useRef(null)
     
     function writeUserData(id, question, answer) {
       const db = getDatabase();
@@ -26,6 +29,15 @@ function Page(props) {
         question: question,
         answer: answer,
       }); 
+    }
+
+    const getuserscore = async (name) => {
+      const db = getDatabase();
+      const reff = ref(db, 'users/'+name);
+      onValue(reff, (snapshot) => {
+        const newdata = snapshot.val();
+        setMscore(newdata.score)
+    });    
     }
 
     const setquestions = async () => {
@@ -43,23 +55,22 @@ function Page(props) {
       });    
     }
 
+    const updatefirebase = (name) =>{
+      const db = getDatabase();
+        set(ref(db, 'users/'+name), {
+          score:mscore+1
+        }); 
+    }
+
     useEffect(()=>{
-      console.log(cookies)
       if (cookies.Answer){
-        console.log(questionslist)
-        //console.log(parseInt(cookies.question))
-        //console.log(cookies.Question, typeof(parseInt(cookies.Question)))
         setInput(cookies.Answer)
-        setRandom(parseInt(cookies.Question))
         answeredright()
-        //console.log(text.current)
-        //console.log(text.current.value)
       }
     },[cookies])
 
 
     const answeredright = () => {
-      console.log("correct")
             setRight(true)
             setAlert(
                 <div style={{marginTop:20}}>
@@ -70,17 +81,12 @@ function Page(props) {
 
 
     const checkanswer = (e)=>{
-        console.log("clicked")
-        console.log(questionslist[random].answer)
-        console.log(input.toLowerCase())
-        if (questionslist[random].answer === input.toLowerCase()){
+        if (questionslist[cookies.Question].answer === input.toLowerCase()){
             answeredright()
             setCookie("Answer", input, { path: '/' })
-            setCookie("Question", random, { path: '/' })
-            //window.location.reload(false)
+            updatefirebase(cookies.Name)
         }
         else{
-            console.log("incorrect")
             setRight(false)
             setAlert(
                 <div style={{marginTop:20}}>
@@ -91,23 +97,24 @@ function Page(props) {
     }
 
     useEffect(()=>{
-        //setquestions()
-        if(!cookies.Answer){
-        setRandom(Math.floor(Math.random() * (questions)))
-        }
-        getquestions()
-      
-        //handle()
+      if(!cookies.Question){
+        setCookie("Question", Math.floor(Math.random() * (questions)), { path: '/' })
+        window.location.reload(false)
+      }
     },[])
 
     useEffect(()=>{
-        let set = questionslist[random]
+      console.log(questionbank)
+        getquestions()
+        getuserscore(cookies.Name)
+    },[])
+
+    useEffect(()=>{
+        let set = questionslist[cookies.Question]
         if (set){
-            console.log(set.question)
             setQuestion(set.question)
         }
-        console.log(questionslist)
-    },[questionslist])
+    },[questionslist, cookies])
 
 
   return (
