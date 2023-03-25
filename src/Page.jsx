@@ -12,7 +12,7 @@ import {useSearchParams } from 'react-router-dom';
 
 function Page(props) {
     const [questionslist, setQuestionslist] = useState([])
-    const questionbank = window.location.pathname//.split("/")[2]//queryString.parse(props.location)
+    const questionbank = window.location.hash.split("/")[1]//.split("/")[2]//queryString.parse(props.location)
     const [cookies, setCookie] = useCookies(['user']);
     const [input, setInput] = useState("")
     const [question, setQuestion] = useState("")
