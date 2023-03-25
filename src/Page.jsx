@@ -1,12 +1,11 @@
-import { Alert, Button, Card, CardActionArea, CardContent, Hidden, TextField, Typography } from '@mui/material'
+import { Alert, Button, Card, CardActionArea, CardContent, createTheme, TextField, Typography, ThemeProvider } from '@mui/material'
 import { useEffect, useReducer, useRef, useState } from 'react'
 import './App.css'
 import {data} from './data'
 import {app, auth} from './firebase';
 import { useCookies } from 'react-cookie';
 import { getDatabase, onValue, ref, set } from "firebase/database";
-
-
+import * as React from "react"
 
 
 function Page(props) {
@@ -126,8 +125,8 @@ function Page(props) {
       </CardActionArea>
     </Card>
     <div style={{marginTop:20, display:'flex', justifyContent: 'space-between'}}>
-    <TextField value={input} disabled={rightans} style={{maxWidth: 500, minWidth:200, width:'80%'}} onChange={e=>setInput(e.target.value)} variant='outlined'/>
-    <Button disabled={rightans} variant='outlined' onClick={checkanswer} style={{minWidth: 40,minHeight: 40,maxWidth: 40,marginLeft: 'auto',marginTop:"auto",marginBottom:"auto", maxHeight: 40}}>&#x2713;</Button>
+    <TextField value={input} disabled={rightans} style={{ maxWidth: 500, minWidth:200, width:'80%'}} onChange={e=>setInput(e.target.value)} variant='outlined'/>
+    <Button disabled={rightans} variant='outlined' onClick={checkanswer} style={{backgroundColor:"white", minWidth: 40,minHeight: 40,maxWidth: 40,marginLeft: 'auto',marginTop:"auto",marginBottom:"auto", maxHeight: 40}}>&#x2713;</Button>
     </div>
     {alert}
     </>

@@ -1,7 +1,8 @@
 import Page from './Page'
 import Login from "./Login"
 import { useCookies } from 'react-cookie';
-import { useEffect } from 'react';
+import { useEffect} from 'react';
+import * as React from "react"
 
 function Interface() {
     const [cookies, setCookie] = useCookies(['user']);
