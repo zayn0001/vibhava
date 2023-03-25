@@ -1,52 +1,52 @@
 export const data = [
     {
       "id": 0,
-      "question": "exercitation dolor velit velit nisi excepteur nostrud mollit quis consequat",
-      "answer": "amet"
+      "question": "They come out at night without being called, and are lost in the day without being stolen. What are they?",
+      "answer": "stars"
     },
     {
       "id": 1,
-      "question": "ea aute ullamco commodo consequat et sint cupidatat anim elit",
-      "answer": "cillum"
+      "question": "I'm full of holes but still hold water. What am I?",
+      "answer": "sponge"
     },
     {
       "id": 2,
-      "question": "non mollit commodo esse cillum duis eiusmod consequat est ad",
-      "answer": "nisi"
+      "question": "I have legs but can't walk, a strong back but can't work,two good arms but can't reach, I have a seat but can't sit.",
+      "answer": "chair"
     },
     {
       "id": 3,
-      "question": "id in reprehenderit reprehenderit velit consequat mollit excepteur sint nulla",
-      "answer": "sunt"
+      "question": "I am made of water, but I’m not wet.What am I?",
+      "answer": "cloud"
     },
     {
       "id": 4,
-      "question": "veniam incididunt enim mollit proident officia anim reprehenderit qui ipsum",
-      "answer": "incididunt"
+      "question": "Four legs up, four legs down, soft in the middle, hard all around.What am I?",
+      "answer": "bed"
     },
     {
       "id": 5,
-      "question": "ullamco minim irure ullamco minim consectetur eiusmod voluptate ad ullamco",
-      "answer": "veniam"
+      "question": "Two twins live together all the time. They see the whole world, but never see each other.",
+      "answer": "eyes"
     },
     {
       "id": 6,
-      "question": "proident proident reprehenderit eiusmod deserunt ullamco velit ullamco irure culpa",
-      "answer": "cupidatat"
+      "question": "I use my ear to speak and my mouth to hear. What am I?",
+      "answer": "phone"
     },
     {
       "id": 7,
-      "question": "qui ipsum veniam elit tempor excepteur deserunt irure enim ut",
-      "answer": "dolor"
+      "question": "I can carry lots of food, but cannot eat anything. What am I?",
+      "answer": "fridge"
     },
     {
       "id": 8,
-      "question": "deserunt eu sint enim duis dolor sunt dolore aute Lorem",
-      "answer": "veniam"
+      "question": "When it comes to me, you go on red and stop on green. What am I?",
+      "answer": "watermelon"
     },
     {
       "id": 9,
-      "question": "nostrud elit elit labore incididunt magna laborum aliquip anim officia",
-      "answer": "voluptate"
+      "question": "What word begins and ends with an E but only has one letter?",
+      "answer": "envelope"
     }
 ]

@@ -38,7 +38,7 @@ function Page() {
         console.log("clicked")
         console.log(questionslist.find(x=>x.id===random).answer)
         console.log(input)
-        if (questionslist.find(x=>x.id===random).answer === input){
+        if (questionslist.find(x=>x.id===random).answer === input.toLowerCase()){
             console.log("correct")
             setRight(true)
             setAlert(
