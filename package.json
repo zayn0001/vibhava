@@ -1,6 +1,7 @@
 {
   "name": "vibhava",
   "private": true,
+  "homepage": "/vibhava/#",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
