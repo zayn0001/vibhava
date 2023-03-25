@@ -19,22 +19,16 @@ function Interface() {
     }
 
     useEffect(()=>{
-        //console.log(cookies.Name)
         if(cookies.Name){
-        //getuserscore(cookies.Name)
         writeUser(cookies.Name)
-        //console.log("written")
-        //getuserscore(cookies.Name)
-        //console.log(getuserscore(cookies.Name))
         }
-        //console.log(cookies.SignedIn)
     },[cookies])
 
     if (cookies.SignedIn){
         return (
             <Routes>
-            <Route path=":questionbank" element={<Page user={cookies.Name}/>} />
-            <Route path="/" element={<Page user={cookies.Name}/>}/>
+            <Route path="/vibhava/:questionbank" element={<Page user={cookies.Name}/>} />
+            <Route path="/vibhava" element={<Page user={cookies.Name}/>}/>
             </Routes>
         )
     }
