@@ -6,7 +6,7 @@ import {app, auth} from './firebase';
 import { useCookies } from 'react-cookie';
 import { getDatabase, onValue, ref, set } from "firebase/database";
 import * as React from "react"
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 
 function Page(props) {
@@ -104,6 +104,7 @@ function Page(props) {
     },[])
 
     useEffect(()=>{
+      console.log(window.location.href)
       console.log(questionbank)
         getquestions()
         getuserscore(cookies.Name)

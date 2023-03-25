@@ -33,8 +33,8 @@ function Interface() {
     if (cookies.SignedIn){
         return (
             <Routes>
-            <Route path="vibhava/:questionbank" element={<Page user={cookies.Name}/>} />
-            <Route path="/vibhava" element={<Page user={cookies.Name}/>}/>
+            <Route path=":questionbank" element={<Page user={cookies.Name}/>} />
+            <Route path="/" element={<Page user={cookies.Name}/>}/>
             </Routes>
         )
     }
