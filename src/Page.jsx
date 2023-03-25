@@ -6,12 +6,13 @@ import {app, auth} from './firebase';
 import { useCookies } from 'react-cookie';
 import { getDatabase, onValue, ref, set } from "firebase/database";
 import * as React from "react"
-import { useLocation, useParams } from 'react-router-dom';
+import {useSearchParams } from 'react-router-dom';
+//import { getSearchParamsForLocation } from 'react-router-dom/dist/dom';
 
 
 function Page(props) {
     const [questionslist, setQuestionslist] = useState([])
-    const {questionbank} = useParams()
+    const questionbank = window.location.pathname.split("/")[2]//queryString.parse(props.location)
     const [cookies, setCookie] = useCookies(['user']);
     const [input, setInput] = useState("")
     const [question, setQuestion] = useState("")

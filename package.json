@@ -1,7 +1,6 @@
 {
   "name": "vibhava",
   "private": true,
-  "homepage": "https://zayn.github.io/vibhava",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
