@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import {data} from './data'
 import {app, auth} from './firebase';
-import { useCookies } from 'react-cookie';
+//import { Cookies, useCookies } from 'react-cookie';
 import { getDatabase, onValue, ref, set } from "firebase/database";
 import * as React from "react"
 import {useSearchParams } from 'react-router-dom';
@@ -12,17 +12,62 @@ import {useSearchParams } from 'react-router-dom';
 
 function Page(props) {
     const [questionslist, setQuestionslist] = useState([])
-    const questionbank = window.location.hash.split("/")[1]//.split("/")[2]//queryString.parse(props.location)
-    const [cookies, setCookie] = useCookies(['user']);
+    const questionbank = window.location.hash.split("/")[1]
+    const [options, setOptions] = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+    //const [cookies, setCookie] = useCookies(['user']);
     const [input, setInput] = useState("")
     const [question, setQuestion] = useState("")
     const questions = 10
     const [rightans, setRight] = useState()
-    //const [done, setDone] = useState("")
     const [alert, setAlert] = useState()
-    //const [random, setRandom] = useState(0)
     const [mscore, setMscore] = useState(0)
-    //const text = useRef(null)
+    const [qnarray, setQnarray] = useState({"Question":"","Answer":""});
+    
+    
+    const getfromstorage = (item) => JSON.parse(localStorage.getItem(item));
+
+    useEffect(()=>{
+      const items = getfromstorage(questionbank)
+      if (items) {
+        setQnarray(items)
+      }
+
+      if(!getfromstorage(questionbank)){
+        const ran = Math.floor(Math.random() * (questions))
+        setQnarray(qnarray=>({
+          ...qnarray,
+          "Question":ran
+        }))
+        console.log(ran, "ran")
+        window.location.reload(false)
+      }
+      console.log(questionbank)
+      getquestions()
+      getuserscore(getfromstorage("login").Name)
+    },[])
+
+
+
+    useEffect(() => {
+      localStorage.setItem(questionbank, JSON.stringify(qnarray));
+      if(!qnarray.Question || !qnarray.Answer){
+        localStorage.setItem(questionbank, JSON.stringify(qnarray));
+      }
+      console.log(localStorage)
+    }, [qnarray]);
+
+
+    useEffect(()=>{
+      if (getfromstorage(questionbank).Answer){
+        setInput(getfromstorage(questionbank).Answer)
+        answeredright()
+      }
+      let set = questionslist[getfromstorage(questionbank).Question]
+      if (set){
+          setQuestion(set.question)
+      }
+      //console.log(cookies)
+    },[questionslist])
     
     function writeUserData(id, question, answer) {
       const db = getDatabase();
@@ -37,7 +82,9 @@ function Page(props) {
       const reff = ref(db, 'users/'+name);
       onValue(reff, (snapshot) => {
         const newdata = snapshot.val();
+        if(newdata){
         setMscore(newdata.score)
+        }
     });    
     }
 
@@ -63,61 +110,38 @@ function Page(props) {
         }); 
     }
 
-    useEffect(()=>{
-      if (cookies.Answer){
-        setInput(cookies.Answer)
-        answeredright()
-      }
-    },[cookies])
+
 
 
     const answeredright = () => {
-            setRight(true)
-            setAlert(
-                <div style={{marginTop:20}}>
-                <Alert severity="success">That's Right</Alert>
-                </div>
-            )
+      setRight(true)
+      setAlert(
+          <div style={{marginTop:20}}>
+          <Alert severity="success">That's Right</Alert>
+          </div>
+      )
     }
 
 
     const checkanswer = (e)=>{
-        if (questionslist[cookies.Question].answer === input.toLowerCase()){
-            answeredright()
-            setCookie("Answer", input, { path: '/' })
-            updatefirebase(cookies.Name)
-        }
-        else{
-            setRight(false)
-            setAlert(
-                <div style={{marginTop:20}}>
-                <Alert severity="error">Wrong Answer</Alert>
-                </div>
-            )
-        }
-    }
-
-    useEffect(()=>{
-      if(!cookies.Question){
-        setCookie("Question", Math.floor(Math.random() * (questions)), { path: '/' })
-        window.location.reload(false)
+      if (questionslist[getfromstorage(questionbank).Question].answer === input.toLowerCase()){
+          answeredright()
+          //setCookie("Answer", input, { path: '/' })
+          setQnarray(qnarray=>({
+            ...qnarray,
+            "Answer":input
+          }))
+          updatefirebase(getfromstorage("login").Name)
       }
-    },[])
-
-    useEffect(()=>{
-      //console.log(window.location.href)
-        console.log(questionbank)
-        getquestions()
-        getuserscore(cookies.Name)
-    },[])
-
-    useEffect(()=>{
-        let set = questionslist[cookies.Question]
-        if (set){
-            setQuestion(set.question)
-        }
-    },[questionslist, cookies])
-
+      else{
+        setRight(false)
+        setAlert(
+          <div style={{marginTop:20}}>
+          <Alert severity="error">Wrong Answer</Alert>
+          </div>
+        )
+      }
+    }
 
   return (
     <>

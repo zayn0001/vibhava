@@ -11,8 +11,19 @@ import { getDatabase, onValue, ref } from 'firebase/database';
 function Login(){
     const [cookies, setCookie] = useCookies(['user']);
     const [username, setUsername] = useState("")
+
+    const [login, setLogin] = useState({})
+    const getfromstorage = () => JSON.parse(localStorage.getItem("login"));
+
     const [alert, setAlert] = useState()
     
+    useEffect(() => {
+      localStorage.setItem("login", JSON.stringify(login));
+      if(!login.Name || !login.SignedIn){
+        localStorage.setItem("login", JSON.stringify(login));
+      }
+      console.log(localStorage)
+    }, [login]);
     
     const signin = async (name) => {
       const db = getDatabase();
@@ -29,8 +40,10 @@ function Login(){
           )
         }
         else{
-          setCookie('Name', username, { path: '/' });
-          setCookie("SignedIn", true, { path: '/' })
+          //setCookie('Name', username, { path: '/' });
+          setLogin(login=>({...login, "Name":username}))
+          //setCookie("SignedIn", true, { path: '/' })
+          setLogin(login=>({...login, "SignedIn":true}))
           window.location.reload(false)
         }
     });    
@@ -39,11 +52,7 @@ function Login(){
     const handleclick = () => {
         signin(username)
         //window.location.reload(false)
-      };
-
-      useEffect(()=>{
-        console.log(cookies)
-      },[cookies])
+    };
 
     return(
        <>

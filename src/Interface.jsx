@@ -1,14 +1,15 @@
 import Page from './Page'
 import Login from "./Login"
-import { useCookies } from 'react-cookie';
-import { useEffect} from 'react';
-import * as React from "react"
+import { useEffect, useState} from 'react';
+import React from "react"
 import { Routes, Route} from 'react-router-dom';
 import {app, auth} from './firebase';
 import { getDatabase, onValue, ref, set } from "firebase/database";
 
 function Interface() {
-    const [cookies, setCookie] = useCookies(['user']);
+    //const [cookies, setCookie] = useCookies(['user']);
+    const [login, setLogin] = useState({})
+    const getfromstorage = () => JSON.parse(localStorage.getItem("login"));
     //const [score, setScore] = React.useState(-1)
 
     function writeUser(name) {
@@ -19,25 +20,29 @@ function Interface() {
     }
 
     useEffect(()=>{
+        if (getfromstorage()){
         const db = getDatabase();
-        const reff = ref(db, 'users/'+cookies.Name);
+        const reff = ref(db, 'users/'+getfromstorage().Name);
         onValue(reff, (snapshot) => {
         const newdata = snapshot.val();
-        if(cookies.Name && !newdata){
-        writeUser(cookies.Name)
+        if(getfromstorage().Name && !newdata){
+        writeUser(getfromstorage().Name)
         }
     })
-    },[cookies])
+    }},[login])
 
-    if (cookies.SignedIn){
+    if (!(getfromstorage()== null || Object.keys(getfromstorage()).length==0) ){
+        //console.log(getfromstorage())
+        if(getfromstorage().SignedIn){
         return (
             <Routes>
-            <Route path="/vibhava/:questionbank" element={<Page user={cookies.Name}/>} />
-            <Route path="/vibhava" element={<Page user={cookies.Name}/>}/>
+            <Route path="/vibhava" element={<Page />}/>
             </Routes>
         )
+        }
     }
     else{
+        //console.log(getfromstorage())
         return (
             <Login />
         )
