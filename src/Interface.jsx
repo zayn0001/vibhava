@@ -19,9 +19,17 @@ function Interface() {
     }
 
     useEffect(()=>{
-        if(cookies.Name){
+        const db = getDatabase();
+        const reff = ref(db, 'users/'+cookies.Name);
+        onValue(reff, (snapshot) => {
+        const newdata = snapshot.val();
+        if(cookies.Name && !newdata){
         writeUser(cookies.Name)
         }
+        else {
+            console.log("didnt overwrite")
+        }
+    })
     },[cookies])
 
     if (cookies.SignedIn){

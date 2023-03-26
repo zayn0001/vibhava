@@ -105,8 +105,8 @@ function Page(props) {
     },[])
 
     useEffect(()=>{
-      console.log(window.location.href)
-      console.log(questionbank)
+      //console.log(window.location.href)
+        console.log(questionbank)
         getquestions()
         getuserscore(cookies.Name)
     },[])
