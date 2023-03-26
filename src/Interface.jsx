@@ -26,9 +26,6 @@ function Interface() {
         if(cookies.Name && !newdata){
         writeUser(cookies.Name)
         }
-        else {
-            console.log("didnt overwrite")
-        }
     })
     },[cookies])
 
