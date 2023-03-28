@@ -158,7 +158,7 @@ function Page(props) {
       </CardActionArea>
     </Card>
     <div style={{marginTop:20, display:'flex', justifyContent: 'space-between'}}>
-    <TextField value={input} disabled={rightans} style={{ maxWidth: 500, minWidth:200, width:'80%'}} onChange={e=>setInput(e.target.value)} variant='outlined'/>
+    <TextField value={input} disabled={rightans} style={{ maxWidth: 500, minWidth:200, width:'80%', borderRadius:'5px', background:'white'}} onChange={e=>setInput(e.target.value)} variant='outlined'/>
     <Button disabled={rightans} variant='outlined' onClick={checkanswer} style={{backgroundColor:"white", minWidth: 40,minHeight: 40,maxWidth: 40,marginLeft: 'auto',marginTop:"auto",marginBottom:"auto", maxHeight: 40}}>&#x2713;</Button>
     </div>
     {alert}

@@ -9,13 +9,24 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: white !important;
+  background-color: #1d273b !important;
+  background: url(vibhavalogo.png), url(down.png);
+  background-repeat: no-repeat, no-repeat;
+  background-size: contain, cover;
+  background-position-x: center, center;
+  background-position-y: top, bottom;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+}
+
+@media only screen and (min-width: 500px) {
+    :root {
+        background-size: 400px, cover;
+    }
 }
 
 a {
