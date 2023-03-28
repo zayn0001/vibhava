@@ -56,7 +56,7 @@ function Login(){
     return(
        <>
         <div style={{marginTop:20, display:'flex', justifyContent: 'space-between'}}>
-        <TextField label="Name" style={{maxWidth: 500, minWidth:200, width:'80%',borderRadius:'5px', background:'white'}} onChange={e=>setUsername(e.target.value)} variant='outlined'/>
+        <TextField label="Name" style={{maxWidth: 500, minWidth:200, width:'80%',borderRadius:'5px', background:'white'}} onChange={e=>setUsername(e.target.value)} variant='filled'/>
         <Button variant='outlined' onClick={handleclick} style={{minWidth: 40,minHeight: 40,maxWidth: 40,marginLeft: 'auto',borderRadius:'5px', background:'white',marginTop:"auto",marginBottom:"auto", maxHeight: 40}}>&#x2713;</Button>
         </div>
         {alert}
