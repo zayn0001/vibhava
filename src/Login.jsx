@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { collection, addDoc, getDocs, setDoc, doc } from "firebase/firestore";
 //import {db} from './firebase';
-import { useCookies } from 'react-cookie';
 import { Alert, Button, TextField } from '@mui/material';
 import { getDatabase, onValue, ref } from 'firebase/database';
 //import { useEffect, useState } from 'react'
@@ -9,7 +8,7 @@ import { getDatabase, onValue, ref } from 'firebase/database';
 
 
 function Login(){
-    const [cookies, setCookie] = useCookies(['user']);
+    //const [cookies, setCookie] = useCookies(['user']);
     const [username, setUsername] = useState("")
 
     const [login, setLogin] = useState({})
@@ -57,8 +56,8 @@ function Login(){
     return(
        <>
         <div style={{marginTop:20, display:'flex', justifyContent: 'space-between'}}>
-        <TextField label="Name" style={{maxWidth: 500, minWidth:200, width:'80%'}} onChange={e=>setUsername(e.target.value)} variant='outlined'/>
-        <Button  variant='outlined' onClick={handleclick} style={{minWidth: 40,minHeight: 40,maxWidth: 40,marginLeft: 'auto',marginTop:"auto",marginBottom:"auto", maxHeight: 40}}>&#x2713;</Button>
+        <TextField label="Name" style={{maxWidth: 500, minWidth:200, width:'80%',borderRadius:'5px', background:'white'}} onChange={e=>setUsername(e.target.value)} variant='outlined'/>
+        <Button  variant='outlined' onClick={handleclick} style={{minWidth: 40,minHeight: 40,maxWidth: 40,marginLeft: 'auto',borderRadius:'5px', background:'white',marginTop:"auto",marginBottom:"auto", maxHeight: 40}}>&#x2713;</Button>
         </div>
         {alert}
         </>
