@@ -16,6 +16,7 @@ function Interface() {
     console.log(questionbank)
     if(!options.includes(questionbank)){
       return <Fof/>
+      
     }
     //const [score, setScore] = React.useState(-1)
 
