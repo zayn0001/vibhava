@@ -13,7 +13,7 @@ import {useSearchParams } from 'react-router-dom';
 function Page(props) {
     const [questionslist, setQuestionslist] = useState([])
     const questionbank = window.location.hash.split("/")[1]
-    const [options, setOptions] = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+    const [options, setOptions] = ["ceaser","binary","alphabet","morse","plain",7,8,9,10,11,12,13,14,15]
     //const [cookies, setCookie] = useCookies(['user']);
     const [input, setInput] = useState("")
     const [question, setQuestion] = useState("")
@@ -118,6 +118,7 @@ function Page(props) {
       setAlert(
           <div style={{marginTop:20}}>
           <Alert severity="success">That's Right</Alert>
+          <Alert style={{marginTop:20}} severity="info">Clue to next answer</Alert>
           </div>
       )
     }
