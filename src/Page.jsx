@@ -18,7 +18,7 @@ function Page(props) {
     //const [cookies, setCookie] = useCookies(['user']);
     const [input, setInput] = useState("")
     const [question, setQuestion] = useState("")
-    const questions = 88
+    const questions = 82
     const [rightans, setRight] = useState()
     const [alert, setAlert] = useState()
     const [mscore, setMscore] = useState(0)
