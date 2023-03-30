@@ -12,6 +12,10 @@ import {useSearchParams } from 'react-router-dom';
 
 function Page(props) {
     const [questionslist, setQuestionslist] = useState([])
+    const [url, setUrl] = useState(window.location.href);
+    useEffect(() => {
+        setUrl(url);
+    }, [url]);
     const questionbank = window.location.hash.split("/")[1]
     const [options, setOptions] = ["ceaser","binary","alphabet","morse","plain",7,8,9,10,11,12,13,14,15]
     //const [cookies, setCookie] = useCookies(['user']);

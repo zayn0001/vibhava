@@ -1,7 +1,6 @@
 html,
 body {
   height: 100%;
-  background-color: white;
 }
 body {
   display: grid;
@@ -75,6 +74,7 @@ body div#error h3:after {
 body div#error p {
   position: relative;
   margin-bottom: 8px;
+  color: white;
 }
 body div#error p span {
   position: relative;
