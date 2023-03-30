@@ -12,7 +12,7 @@ function Interface() {
     const [login, setLogin] = useState({})
     const getfromstorage = () => JSON.parse(localStorage.getItem("login"));
     const questionbank = window.location.hash.split("/")[1]
-    const [options, setOptions] = useState(["ceaser","binary","alphabet","morse","plain",7,8,9,10,11,12,13,14,15])
+    const [options, setOptions] = useState(["sdFFkIIsNN6DD83","asefMMfd89mel8","amfo38rcIIsdfm9","liuSSfax38d6","sldfm823HHcr23j","mxieAAwr8m34y53","jaytvLLu33v6"])
     console.log(questionbank)
     if(!options.includes(questionbank)){
       return <Fof/>
