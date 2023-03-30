@@ -14,10 +14,11 @@ function Page(props) {
     const [questionslist, setQuestionslist] = useState([])
     const questionbank = window.location.hash.split("/")[1]
     const [options, setOptions] = useState(["sdFFkIIsNN6DD83","asefMMfd89mel8","amfo38rcIIsdfm9","liuSSfax38d6","sldfm823HHcr23j","mxieAAwr8m34y53","jaytvLLu33v6"])
+    const [path, setPath] = useState({"sdFFkIIsNN6DD83":"1","asefMMfd89mel8":"2","amfo38rcIIsdfm9":"3","liuSSfax38d6":"4","sldfm823HHcr23j":"5","mxieAAwr8m34y53":"6","jaytvLLu33v6":"7"})
     //const [cookies, setCookie] = useCookies(['user']);
     const [input, setInput] = useState("")
     const [question, setQuestion] = useState("")
-    const questions = 10
+    const questions = 88
     const [rightans, setRight] = useState()
     const [alert, setAlert] = useState()
     const [mscore, setMscore] = useState(0)
@@ -38,10 +39,10 @@ function Page(props) {
           ...qnarray,
           "Question":ran
         }))
-        console.log(ran, "ran")
+        //console.log(ran, "ran")
         window.location.reload(false)
       }
-      console.log(questionbank)
+      //console.log(questionbank)
       getquestions()
       getuserscore(getfromstorage("login").Name)
     },[])
@@ -53,7 +54,7 @@ function Page(props) {
       if(!qnarray.Question || !qnarray.Answer){
         localStorage.setItem(questionbank, JSON.stringify(qnarray));
       }
-      console.log(localStorage)
+      //console.log(localStorage)
     }, [qnarray]);
 
 
@@ -63,9 +64,12 @@ function Page(props) {
         answeredright()
       }
       let set = questionslist[getfromstorage(questionbank).Question]
+      //console.log(set.Question)
       if (set){
-          setQuestion(set.question)
+        //console.log(set)
+          setQuestion(set.Question)
       }
+      //console.log(questionslist)
       //console.log(cookies)
     },[questionslist])
     
@@ -96,7 +100,7 @@ function Page(props) {
 
     const getquestions = async () => {
       const db = getDatabase();
-      const reff = ref(db, 'questions/');
+      const reff = ref(db, 'Questions/');
       onValue(reff, (snapshot) => {
         const newdata = snapshot.val();
         setQuestionslist(newdata)
@@ -118,14 +122,16 @@ function Page(props) {
       setAlert(
           <div style={{marginTop:20}}>
           <Alert severity="success">That's Right</Alert>
-          <Alert style={{marginTop:20}} severity="info">Clue to next answer</Alert>
+          <Alert style={{marginTop:20}} severity="info">{path[questionbank]}</Alert>
           </div>
       )
     }
 
 
     const checkanswer = (e)=>{
-      if (questionslist[getfromstorage(questionbank).Question].answer === input.toLowerCase()){
+      //console.log(questionslist[getfromstorage(questionbank).Question].Answer)
+      //console.log(input.toLowerCase())
+      if (questionslist[getfromstorage(questionbank).Question].Answer === input.toLowerCase()){
           answeredright()
           //setCookie("Answer", input, { path: '/' })
           setQnarray(qnarray=>({
