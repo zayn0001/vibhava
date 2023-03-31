@@ -22,7 +22,7 @@ function Login(){
     function writeUserData() {
       const db = getDatabase();
       set(ref(db, 'userdata/'+username), {
-        name: name,
+        insta: name,
         mail: mail,
       }); 
     }
@@ -70,8 +70,8 @@ function Login(){
     return(
        <>
         <div style={{marginTop:20, display:'flex', justifyContent: 'space-between',alignItems: 'flex-end',gap: 15, flexDirection:"column"}}>
-        <TextField label="Instagram ID" style={{maxWidth: 500, minWidth:200, width:'100%',borderRadius:'5px', background:'white'}} onChange={e=>setUsername(e.target.value)} variant='filled' required/>
-        <TextField label="Name" style={{maxWidth: 500, minWidth:200, width:'100%',borderRadius:'5px', background:'white'}} onChange={e=>setName(e.target.value)} variant='filled' required/>
+        <TextField label="Name" style={{maxWidth: 500, minWidth:200, width:'100%',borderRadius:'5px', background:'white'}} onChange={e=>setUsername(e.target.value)} variant='filled' required/>
+        <TextField label="Instagram ID" style={{maxWidth: 500, minWidth:200, width:'100%',borderRadius:'5px', background:'white'}} onChange={e=>setName(e.target.value)} variant='filled' required/>
         <TextField label="E-mail" style={{maxWidth: 500, minWidth:200, width:'100%',borderRadius:'5px', background:'white'}} onChange={e=>setMail(e.target.value)} variant='filled' required/>
         <Button variant='outlined' onClick={handleclick} style={{minWidth: 40,minHeight: 40,maxWidth: 40,marginLeft: 'auto',borderRadius:'5px', background:'white',marginTop:"auto",marginBottom:"auto", maxHeight: 40}}>&#x2713;</Button>
         </div>
