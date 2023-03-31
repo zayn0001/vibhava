@@ -122,7 +122,6 @@ function Page(props) {
       setAlert(
           <div style={{marginTop:20}}>
           <Alert severity="success">That's Right</Alert>
-          <Alert style={{marginTop:20}} severity="info">{path[questionbank]}</Alert>
           </div>
       )
     }
